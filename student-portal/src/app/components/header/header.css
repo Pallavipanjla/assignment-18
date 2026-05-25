@@ -1,0 +1,56 @@
+.header {
+  background: linear-gradient(135deg, #5b157c, #7b2cbf);
+
+  margin: 15px;
+  padding: 20px 45px;
+
+  border-radius: 22px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+  font-size: 42px;
+  font-weight: bold;
+
+  color: white;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+
+  margin-left: 35px;
+  font-size: 22px;
+  font-weight: 500;
+
+  position: relative;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #ffd60a;
+}
+
+nav a::after {
+  content: '';
+
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+
+  width: 0%;
+  height: 3px;
+
+  background: #ffd60a;
+
+  transition: 0.4s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
