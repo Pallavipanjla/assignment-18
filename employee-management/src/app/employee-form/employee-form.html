@@ -1,0 +1,72 @@
+<!-- employee-form.html -->
+<div class="form-card">
+
+  <div class="form-header">
+    <h2>➕ Add Employee</h2>
+    <p>Fill in the details to add a new team member</p>
+  </div>
+  <div class="form-divider"></div>
+
+  <div class="form-body">
+
+    <div class="form-group">
+      <label>Full Name</label>
+      <div class="input-icon-wrap">
+        <span class="icon">👤</span>
+        <input
+          type="text"
+          [(ngModel)]="name"
+          placeholder="e.g. Priya Sharma"
+          title="Employee name" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Department</label>
+      <div class="input-icon-wrap">
+        <span class="icon">🏬</span>
+        <input
+          type="text"
+          [(ngModel)]="dept"
+          placeholder="e.g. Engineering"
+          title="Department" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Salary (₹)</label>
+      <div class="input-icon-wrap">
+        <span class="icon">💰</span>
+        <input
+          type="number"
+          [(ngModel)]="salary"
+          placeholder="e.g. 55000"
+          title="Salary"
+          min="0" />
+      </div>
+    </div>
+
+    <div class="form-group">
+  <label>Email Address</label>
+  <div class="input-icon-wrap">
+    <span class="icon">✉️</span>
+    <input
+      type="email"
+      [(ngModel)]="email"
+      (ngModelChange)="onEmailChange()"
+      placeholder="e.g. priya@company.com"
+      title="Email address"
+      [class.input-error]="emailError" />
+  </div>
+  <span class="error-msg" *ngIf="emailError">⚠️ {{ emailError }}</span>
+</div>
+  </div>
+
+  <div class="form-footer">
+    <button class="btn-submit" (click)="submit()">
+      <span class="btn-icon">✚</span>
+      Add Employee
+    </button>
+  </div>
+
+</div>

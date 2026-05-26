@@ -1,0 +1,31 @@
+<!-- app.html -->
+<div class="page-wrap">
+
+  <!-- Header Bar -->
+  <div class="page-header">
+    <div class="header-left">
+      <div class="header-logo"><span>EM</span></div>
+      <div>
+        <h1 class="page-title">Employee Management</h1>
+      </div>
+    </div>
+    <div class="header-stats">
+      <div class="hstat">
+        <span class="hstat-num">{{ employees.length }}</span>
+        <span class="hstat-label">Total Employees</span>
+      </div>
+      <div class="hstat-divider"></div>
+      <div class="hstat">
+        <span class="hstat-num">{{ departments.length }}</span>
+        <span class="hstat-label">Departments</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Grid -->
+  <div class="main-grid">
+    <app-employee-form></app-employee-form>
+    <app-employee-list></app-employee-list>
+  </div>
+
+</div>

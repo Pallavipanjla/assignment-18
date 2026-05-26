@@ -1,0 +1,107 @@
+<!-- employee-list.html -->
+<div class="list-card">
+
+  <div class="list-header">
+    <h2>📋 Employee Records</h2>
+    <div class="list-header-right">
+
+      <!-- Search box -->
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          class="search-input"
+          type="text"
+          [(ngModel)]="searchName"
+          placeholder="Search by name..."
+          title="Search by name" />
+      </div>
+
+      <!-- Department filter -->
+      <select
+        class="dept-select"
+        [(ngModel)]="selectedDept"
+        title="Filter by department">
+        <option value="">All Departments</option>
+        <option *ngFor="let d of departments" [value]="d">{{ d }}</option>
+      </select>
+
+      <span class="badge-count">
+        {{ (employees | departmentFilter:selectedDept | nameFilter:searchName).length }} employees
+      </span>
+    </div>
+  </div>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Salary</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Empty state -->
+        <tr *ngIf="(employees | departmentFilter:selectedDept | nameFilter:searchName).length === 0">
+          <td colspan="6">
+            <div class="empty-state">
+              <div class="empty-icon">🔍</div>
+              <p>No employees found</p>
+            </div>
+          </td>
+        </tr>
+
+        <tr
+          *ngFor="let emp of employees | departmentFilter:selectedDept | nameFilter:searchName"
+          [class.editing-row]="editingId === emp.id">
+
+          <!-- VIEW MODE -->
+          <ng-container *ngIf="editingId !== emp.id">
+            <td class="td-id">#{{ emp.id }}</td>
+            <td class="td-name">
+              <div class="name-with-avatar">
+                <div class="mini-avatar">{{ emp.name.charAt(0).toUpperCase() }}</div>
+                {{ emp.name | titlecase }}
+              </div>
+            </td>
+            <td>
+              <span class="dept-pill" [ngClass]="emp.dept.toLowerCase()">
+                <span class="dot"></span>
+                {{ emp.dept | titlecase }}
+              </span>
+            </td>
+            <td class="td-salary">{{ emp.salary | currency:'INR':'symbol':'1.0-0' }}</td>
+            <td class="td-email">{{ emp.email }}</td>
+            <td class="actions-cell">
+              <button class="btn-edit" (click)="startEdit(emp)">✏️ Edit</button>
+              <button class="btn-delete" (click)="delete(emp.id)">🗑️ Delete</button>
+            </td>
+          </ng-container>
+
+          <!-- EDIT MODE -->
+          <ng-container *ngIf="editingId === emp.id">
+            <td class="td-id">#{{ emp.id }}</td>
+            <td><input class="edit-input" [(ngModel)]="editData.name"   title="Name"   placeholder="Name" /></td>
+            <td><input class="edit-input" [(ngModel)]="editData.dept"   title="Dept"   placeholder="Dept" /></td>
+            <td><input class="edit-input edit-input-salary" [(ngModel)]="editData.salary" title="Salary" placeholder="Salary" type="number" /></td>
+            <td><input class="edit-input edit-input-email"  [(ngModel)]="editData.email"  title="Email"  placeholder="Email" /></td>
+            <td class="actions-cell">
+              <button class="btn-save"   (click)="saveEdit()">✅ Save</button>
+              <button class="btn-cancel" (click)="cancelEdit()">✕ Cancel</button>
+            </td>
+          </ng-container>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="list-footer">
+    Showing {{ (employees | departmentFilter:selectedDept | nameFilter:searchName).length }} of {{ employees.length }} employees
+  </div>
+
+</div>
